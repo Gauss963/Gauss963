@@ -40,8 +40,8 @@ rupture physics, low-cost monitoring systems, and computational methods. My thes
 - Chun-Yu Ke, **Gauss T. Chang**, Gregory C. McLaskey, David S. Kammer, Chris Marone (2026).
   *Nonlocal Elastic Unloading as a Mechanism for Breakdown Work Scaling in Laboratory Earthquakes.*
   **Earth and Planetary Science Letters.** [doi:10.1016/j.epsl.2026.120283](https://doi.org/10.1016/j.epsl.2026.120283)
-- **Gauss T. Chang** et al. (in preparation). *QSIS: A Low-Cost Structural Health Monitoring System.*
-- **Gauss T. Chang** et al. (in preparation). *Secondary Weakening in dm-Scale Laboratory Earthquakes: Frictional Origin or Rigid-Body Artifact?*
+<!-- - **Gauss T. Chang** et al. (in preparation). *QSIS: A Low-Cost Structural Health Monitoring System.*
+- **Gauss T. Chang** et al. (in preparation). *Secondary Weakening in dm-Scale Laboratory Earthquakes: Frictional Origin or Rigid-Body Artifact?* -->
 
 Conference abstracts presented at **JpGU 2025 / JpGU-AGU 2026**, **AGU Fall Meeting 2024**,
 **EGU 2025**, **Taiwan Geosciences Assembly 2025**, and **TEC24** —
@@ -59,7 +59,7 @@ full list on the [CV page](https://gauss963.github.io/Gauss963/CV.html).
 | LaTeX report template | [AcademicReport](https://github.com/Gauss963/AcademicReport) | LaTeX, academic report |
 | LaTeX slide template | [AcademicBeamer](https://github.com/Gauss963/AcademicBeamer) | LaTeX, Beamer slides |
 
-## About this repository
+<!-- ## About this repository
 
 This repository is both my GitHub profile repository and the source of my personal site,
 published with GitHub Pages at **<https://gauss963.github.io/Gauss963/>**.
@@ -70,9 +70,9 @@ published with GitHub Pages at **<https://gauss963.github.io/Gauss963/>**.
 | About | [`CV.html`](https://github.com/Gauss963/Gauss963/blob/main/CV.html) | Education, research experience, honors, publications ([PDF](https://github.com/Gauss963/Gauss963/blob/main/CV/CV-2P.pdf)) |
 | Research | [`Projects.html`](https://github.com/Gauss963/Gauss963/blob/main/Projects.html) | Research software, computational tools, academic templates |
 | Articles | [`Articles.html`](https://github.com/Gauss963/Gauss963/blob/main/Articles.html) | Chronological archive of notes, essays, conference updates, translations |
-| Contact | [`Contact.html`](https://github.com/Gauss963/Gauss963/blob/main/Contact.html) | Email, academic links, campus location |
+| Contact | [`Contact.html`](https://github.com/Gauss963/Gauss963/blob/main/Contact.html) | Email, academic links, campus location | -->
 
-**How it is built** — plain HTML, CSS, and vanilla JavaScript; no build step or framework.
+<!-- **How it is built** — plain HTML, CSS, and vanilla JavaScript; no build step or framework.
 
 - `styles.css` carries the site shell; `dark-mode.css` handles theming, and `script.js` drives
   scroll reveals plus the article archive rendering.
@@ -87,7 +87,7 @@ published with GitHub Pages at **<https://gauss963.github.io/Gauss963/>**.
 
   which rewrites `articles-data.js` (currently 21 entries) from the article pages themselves;
   `Articles.html` and the homepage highlight read from it.
-- Supporting material sits in `Abstracts/`, `paper/`, `CV/`, `images/`, and `article-assets/`.
+- Supporting material sits in `Abstracts/`, `paper/`, `CV/`, `images/`, and `article-assets/`. -->
 
 ## Contact
 
