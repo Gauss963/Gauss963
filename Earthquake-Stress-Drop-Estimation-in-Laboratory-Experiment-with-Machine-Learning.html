@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Earthquake Stress-Drop Estimation in Laboratory Experiment with Machine Learning | Gauss T. Chang</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Fraunces:opsz,wght@9..144,600;9..144,700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="article.css" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MTX5M07K9R"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-MTX5M07K9R");
+    </script>
+  </head>
+  <body class="article-page no-cover template-prose">
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="brand">
+          <a href="index.html" class="brand-mark" aria-label="National Taiwan University home">
+            <img src="images/logo/NTU-logo.svg" alt="National Taiwan University logo" class="brand-logo" />
+          </a>
+          <div>
+            <p class="eyebrow">National Taiwan University</p>
+            <a href="index.html" class="brand-name">Gauss Chang</a>
+          </div>
+        </div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="CV.html">About</a>
+          <a href="Projects.html">Research</a>
+          <a href="Articles.html" aria-current="page">Articles</a>
+          <a href="Contact.html">Contact</a>
+          <a href="https://www.ntu.edu.tw" target="_blank" rel="noopener noreferrer">NTU</a>
+        </nav>
+      </header>
+
+      <main class="page article-layout">
+        <article class="article-shell">
+          <header class="hero article-hero">
+            <span class="eyebrow">Conference Abstract</span>
+            <h1>Earthquake Stress-Drop Estimation in<br>
+                            Laboratory Experiment with Machine Learning</h1>
+            <div class="meta">Gauss T. Chang · Chris Marone · Chun-Yu Ke<br>
+                            National Taiwan University · La Sapienza Università di Roma · Pennsylvania State University<br>
+                            Corresponding Author: b09501028@ntu.edu.tw<br>
+                            Posted on 2025-02-11</div>
+          </header>
+
+          <div class="content article-content">
+            <p class="intro"><strong>Keywords:</strong> Stress Drop, Earthquake Rupture Processes,
+                            Laboratory Earthquakes, Direct Shear Experiments, Machine Learning</p>
+
+            <h2>Abstract</h2>
+
+                    <p>
+                        Stress drop is a key parameter that influences earthquake rupture processes and ground-motion
+                        characteristics.
+                        By quantifying the difference in shear stress before and after a rupture, it offers direct insight into how
+                        energy
+                        is released during an earthquake. However, stress drop varies significantly from fault to fault and from
+                        event
+                        to event, underscoring the importance of improved measurement techniques. Previous studies have successfully
+                        adopted machine learning in laboratory earthquake datasets to predict time to failure (Rouet-Leduc 2017) and
+                        shear stress (Shreedharan 2021). However, their experimental fault systems were predominantly unstable.
+                        Specifically, the system is unstable when the loading stiffness k’ is much lower than the critical stiffness
+                        k<sub>c</sub>’,
+                        i.e., k’ ≪ k<sub>c</sub>’. Single state variable rate-and-state friction model suggests that slow-slip
+                        behavior
+                        emerges in the special case where k’ ≈ k<sub>c</sub>’, which has significance for slow earthquake detection
+                        and
+                        earthquake early-warning systems.
+                    </p>
+
+                    <p>
+                        In this study, we conducted double direct shear experiments on granite faults and generated laboratory
+                        earthquakes across a range of critical stiffness ratios (K = k’/k<sub>c</sub>’), from near-critical
+                        conditions
+                        (K ≈ 1) to highly unstable (K ≪ 1). These conditions were achieved by varying normal stress, shearing rate,
+                        and loading stiffness. Acoustic emission (AE) data were collected continuously at 2.5 MHz using an array of
+                        12 ultrasonic piezoelectric transducers embedded in a steel block, which is in direct contact with one of
+                        the granite side block. Additionally, shear strain was recorded at 13 equidistant locations at 100 kHz to
+                        capture transient local strain perturbations along the 15-cm saw-cut granite fault.
+                        At near-critical conditions, we observed consecutive events with highly variable stress-drops.
+                        The datasets with diverse event characteristics better emulate natural faults without strictly repeating
+                        rupture
+                        patterns and offer a broader training set for machine learning models, enhancing robustness in stress drop
+                        estimation and potentially improving their ability to generalize across varying fault conditions.
+                    </p>
+
+                    <p>
+                        For large earthquakes, well-established techniques—such as finite-fault inversions, back-projection, and
+                        other
+                        seismological models—can be used to estimate stress drop. However, for small earthquakes (magnitude M ≤ 2),
+                        these methods often become infeasible due to sparse data and low signal-to-noise ratios. To date, accurately
+                        measuring the in situ stress drop at small fault ruptures remains a challenge, and thus these techniques are
+                        typically evaluated through numerical simulations or laboratory analogs.
+                    </p>
+
+                    <p>
+                        Leveraging the power of Transformer-based machine learning, multiple acoustic emissions signals from
+                        different
+                        channels are concatenated into multi-dimensional features and fed into a Transformer model. By treating all
+                        these signals as one “multi-feature” sequence (rather than separate inputs), the self-attention mechanism
+                        within
+                        the Transformer can learn the complex temporal correlations among them. The model can effectively capture
+                        how
+                        changes in one signal relate to another over time, enabling robust predictions of stress drop even with
+                        limited, noisy data.
+                    </p>
+
+                    <p>
+                        Our results suggest that combining data-driven machine learning models with direct shear experiments could
+                        bridge the gap between controlled laboratory measurements and real-world earthquake processes.
+                    </p>
+            </div>
+        </article>
+      </main>
+
+      <footer class="site-footer">
+        <p>© 2026 Gauss Chang.</p>
+        <a href="Articles.html">Articles</a>
+      </footer>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

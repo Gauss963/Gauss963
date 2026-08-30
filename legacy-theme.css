@@ -1,0 +1,217 @@
+body.legacy-themed {
+  background: var(--bg);
+  color: var(--text);
+}
+
+body.legacy-themed .theme-toggle-checkbox,
+body.legacy-themed .theme-toggle-button {
+  display: none !important;
+}
+
+.legacy-page-shell {
+  width: min(calc(100% - 32px), var(--max-width));
+  margin: 0 auto;
+  padding: 0 0 48px;
+}
+
+.legacy-content-shell {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 36px 0 0;
+}
+
+.legacy-content-shell.page,
+.legacy-content-shell.container,
+.legacy-content-shell#conteiner {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 36px 0 0;
+}
+
+.legacy-content-shell.article-shell,
+.legacy-content-shell.container,
+.legacy-content-shell#conteiner,
+.legacy-content-shell > .article-shell {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.legacy-content-shell .hero,
+.legacy-content-shell > header,
+.legacy-content-shell .article-shell > header,
+.legacy-content-shell #header {
+  padding: 0 0 24px;
+  margin: 0 0 24px;
+  background: transparent;
+  border-bottom: 1px solid var(--line);
+}
+
+.legacy-content-shell .eyebrow {
+  display: block;
+  padding: 0;
+  margin: 0 0 8px;
+  border-radius: 0;
+  background: transparent;
+}
+
+.legacy-content-shell h1 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  line-height: 1.2;
+}
+
+.legacy-content-shell .meta,
+.legacy-content-shell .keywords,
+.legacy-content-shell .publication-meta {
+  margin-top: 10px;
+  color: var(--muted);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.94rem;
+  line-height: 1.7;
+}
+
+.legacy-content-shell .lead,
+.legacy-content-shell .intro {
+  max-width: 62ch;
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.legacy-content-shell .content,
+.legacy-content-shell > div:not(.language_change),
+.legacy-content-shell > p,
+.legacy-content-shell > h2,
+.legacy-content-shell > h3,
+.legacy-content-shell > table {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.legacy-content-shell .content {
+  padding: 0;
+}
+
+.legacy-content-shell h2 {
+  margin: 2.3rem 0 1rem;
+  color: var(--text);
+  font-size: 1.55rem;
+  line-height: 1.3;
+}
+
+.legacy-content-shell h3 {
+  margin: 1.8rem 0 0.9rem;
+  color: var(--text);
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+
+.legacy-content-shell p,
+.legacy-content-shell li,
+.legacy-content-shell td,
+.legacy-content-shell th,
+.legacy-content-shell blockquote,
+.legacy-content-shell figcaption {
+  color: var(--muted);
+  line-height: 1.75;
+  font-size: 1rem;
+}
+
+.legacy-content-shell p + p {
+  margin-top: 1rem;
+}
+
+.legacy-content-shell figure,
+.legacy-content-shell .intro,
+.legacy-content-shell .related,
+.legacy-content-shell .callout,
+.legacy-content-shell .detail-card,
+.legacy-content-shell .session,
+.legacy-content-shell .link-card,
+.legacy-content-shell blockquote {
+  margin: 1.4rem 0 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: #fafafa;
+  box-shadow: none;
+}
+
+.legacy-content-shell img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+}
+
+.legacy-content-shell table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.4rem;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.legacy-content-shell table td,
+.legacy-content-shell table th {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.legacy-content-shell .details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 1rem;
+}
+
+.legacy-content-shell .detail-card {
+  margin-top: 0;
+}
+
+.legacy-content-shell .detail-label {
+  margin-bottom: 6px;
+  color: var(--accent);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.legacy-content-shell .detail-value {
+  color: var(--text);
+}
+
+.legacy-content-shell .back {
+  display: inline-block;
+  margin-top: 24px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  .legacy-page-shell {
+    width: min(calc(100% - 24px), var(--max-width));
+  }
+
+  .legacy-content-shell {
+    padding-top: 28px;
+  }
+
+  .legacy-content-shell.page,
+  .legacy-content-shell.container,
+  .legacy-content-shell#conteiner {
+    padding-top: 28px;
+  }
+
+  .legacy-content-shell .details-grid {
+    grid-template-columns: 1fr;
+  }
+}

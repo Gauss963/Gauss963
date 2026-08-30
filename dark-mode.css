@@ -1,0 +1,307 @@
+.theme-toggle-checkbox {
+    position: fixed;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.theme-toggle-button {
+    position: fixed;
+    top: max(1rem, env(safe-area-inset-top));
+    right: max(1rem, env(safe-area-inset-right));
+    z-index: 2147483647;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.62rem 0.92rem;
+    border: 1px solid #d1d5db;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    color: #111111;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.16);
+    cursor: pointer;
+    user-select: none;
+    font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+}
+
+.theme-toggle-button::before {
+    content: "";
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 999px;
+    background: #111111;
+    box-shadow: 0 0 0 2px rgba(17, 17, 17, 0.08);
+}
+
+.theme-toggle-on {
+    display: none;
+}
+
+body:has(#theme-toggle:checked) {
+    --bg: #000000;
+    --surface: #050505;
+    --surface-soft: #0a0a0a;
+    --card: #0a0a0a;
+    --text: #f5f5f5;
+    --text-muted: #b7b7b7;
+    --muted: #b7b7b7;
+    --line: #2f2f2f;
+    --border: #3a3a3a;
+    --accent: #8fc7ff;
+    --primary: #8fc7ff;
+    --primary-strong: #d9edff;
+    --shadow: 0 20px 40px rgba(0, 0, 0, 0.72);
+    color-scheme: dark;
+    background: var(--bg) !important;
+    background-color: var(--bg) !important;
+    color: var(--text) !important;
+}
+
+body:has(#theme-toggle:checked) .theme-toggle-button {
+    background: rgba(0, 0, 0, 0.92);
+    color: #f5f5f5;
+    border-color: #3a3a3a;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.56);
+}
+
+body:has(#theme-toggle:checked) .theme-toggle-button::before {
+    background: #f5f5f5;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
+}
+
+body:has(#theme-toggle:checked) .theme-toggle-off {
+    display: none;
+}
+
+body:has(#theme-toggle:checked) .theme-toggle-on {
+    display: inline;
+}
+
+body:has(#theme-toggle:checked) a {
+    color: var(--accent) !important;
+}
+
+body:has(#theme-toggle:checked) a:hover {
+    color: var(--primary-strong) !important;
+}
+
+body:has(#theme-toggle:checked) h1,
+body:has(#theme-toggle:checked) h2,
+body:has(#theme-toggle:checked) h3,
+body:has(#theme-toggle:checked) .item-title,
+body:has(#theme-toggle:checked) .article-title,
+body:has(#theme-toggle:checked) .project-title,
+body:has(#theme-toggle:checked) .entry-title,
+body:has(#theme-toggle:checked) header h1 {
+    color: #ffffff !important;
+}
+
+body:has(#theme-toggle:checked) header p,
+body:has(#theme-toggle:checked) .subtitle,
+body:has(#theme-toggle:checked) .meta,
+body:has(#theme-toggle:checked) .item-meta,
+body:has(#theme-toggle:checked) .article-meta,
+body:has(#theme-toggle:checked) .project-meta,
+body:has(#theme-toggle:checked) .affiliation,
+body:has(#theme-toggle:checked) figcaption,
+body:has(#theme-toggle:checked) footer,
+body:has(#theme-toggle:checked) .link-card span {
+    color: var(--muted) !important;
+}
+
+body:has(#theme-toggle:checked) .container,
+body:has(#theme-toggle:checked) .card,
+body:has(#theme-toggle:checked) .article-shell,
+body:has(#theme-toggle:checked) .article-hero,
+body:has(#theme-toggle:checked) .hero,
+body:has(#theme-toggle:checked) .hero-panel,
+body:has(#theme-toggle:checked) section,
+body:has(#theme-toggle:checked) .intro,
+body:has(#theme-toggle:checked) .route-card,
+body:has(#theme-toggle:checked) .movie-section,
+body:has(#theme-toggle:checked) .detail-card,
+body:has(#theme-toggle:checked) .callout,
+body:has(#theme-toggle:checked) .related,
+body:has(#theme-toggle:checked) figure,
+body:has(#theme-toggle:checked) .meta-list li,
+body:has(#theme-toggle:checked) .article-list li,
+body:has(#theme-toggle:checked) .project-list li,
+body:has(#theme-toggle:checked) .link-card {
+    background: var(--surface) !important;
+    border-color: var(--line) !important;
+    box-shadow: var(--shadow) !important;
+    color: var(--text) !important;
+}
+
+body:has(#theme-toggle:checked) .hero {
+    background: linear-gradient(180deg, #060606, #000000) !important;
+}
+
+body:has(#theme-toggle:checked) .article-hero {
+    background: linear-gradient(180deg, #060606, #000000) !important;
+}
+
+body:has(#theme-toggle:checked) .hero-panel,
+body:has(#theme-toggle:checked) section,
+body:has(#theme-toggle:checked) .intro,
+body:has(#theme-toggle:checked) .route-card,
+body:has(#theme-toggle:checked) .movie-section,
+body:has(#theme-toggle:checked) .detail-card,
+body:has(#theme-toggle:checked) .callout,
+body:has(#theme-toggle:checked) .related,
+body:has(#theme-toggle:checked) figure,
+body:has(#theme-toggle:checked) .meta-list li,
+body:has(#theme-toggle:checked) .article-list li,
+body:has(#theme-toggle:checked) .project-list li,
+body:has(#theme-toggle:checked) blockquote,
+body:has(#theme-toggle:checked) .link-card,
+body:has(#theme-toggle:checked) .phone .card,
+body:has(#theme-toggle:checked) .phone .stats,
+body:has(#theme-toggle:checked) .phone .avatar-wrap {
+    background: #0a0a0a !important;
+}
+
+body:has(#theme-toggle:checked) .btn-ghost,
+body:has(#theme-toggle:checked) .section-action .btn,
+body:has(#theme-toggle:checked) .phone .menu {
+    background: #050505 !important;
+    color: var(--text) !important;
+    border-color: var(--line) !important;
+}
+
+body:has(#theme-toggle:checked) .btn-primary {
+    background: #ffffff !important;
+    color: #000000 !important;
+    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.44) !important;
+}
+
+body:has(#theme-toggle:checked) .eyebrow {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #f5f5f5 !important;
+}
+
+body:has(#theme-toggle:checked) .rank {
+    background: #f5f5f5 !important;
+    color: #000000 !important;
+}
+
+body:has(#theme-toggle:checked) .detail-label,
+body:has(#theme-toggle:checked) .meta,
+body:has(#theme-toggle:checked) .related-title + p,
+body:has(#theme-toggle:checked) .callout p {
+    color: var(--muted) !important;
+}
+
+body:has(#theme-toggle:checked) .detail-value,
+body:has(#theme-toggle:checked) .detail-value strong,
+body:has(#theme-toggle:checked) .related-title,
+body:has(#theme-toggle:checked) .intro strong {
+    color: #ffffff !important;
+}
+
+body:has(#theme-toggle:checked) .btn-ghost:hover,
+body:has(#theme-toggle:checked) .section-action .btn:hover,
+body:has(#theme-toggle:checked) .meta-list li:hover,
+body:has(#theme-toggle:checked) .article-list li:hover,
+body:has(#theme-toggle:checked) .project-list li:hover,
+body:has(#theme-toggle:checked) .link-card:hover {
+    background: #121212 !important;
+    border-color: #565656 !important;
+}
+
+body:has(#theme-toggle:checked) .plain-list li,
+body:has(#theme-toggle:checked) .card p,
+body:has(#theme-toggle:checked) .contact-list li,
+body:has(#theme-toggle:checked) .lead,
+body:has(#theme-toggle:checked) .intro,
+body:has(#theme-toggle:checked) .closing,
+body:has(#theme-toggle:checked) p,
+body:has(#theme-toggle:checked) li {
+    color: var(--text) !important;
+}
+
+body:has(#theme-toggle:checked) blockquote {
+    border-left-color: #8fc7ff !important;
+}
+
+body:has(#theme-toggle:checked) figure img {
+    border-color: var(--line) !important;
+}
+
+body:has(#theme-toggle:checked) figure object {
+    background: #050505 !important;
+    border-color: var(--line) !important;
+}
+
+body:has(#theme-toggle:checked) .date {
+    background: #141414 !important;
+    color: #f5f5f5 !important;
+}
+
+body:has(#theme-toggle:checked) .phone,
+body:has(#theme-toggle:checked) .topbar {
+    background: #000000 !important;
+}
+
+body:has(#theme-toggle:checked) .phone .card,
+body:has(#theme-toggle:checked) .phone .stats,
+body:has(#theme-toggle:checked) .phone .avatar-wrap {
+    border-color: #373737 !important;
+}
+
+body:has(#theme-toggle:checked) .topbar {
+    border-bottom-color: #1a1a1a !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+body:has(#theme-toggle:checked) div#conteiner,
+body:has(#theme-toggle:checked) div#conteiner table td,
+body:has(#theme-toggle:checked) div#conteiner table th,
+body:has(#theme-toggle:checked) div#clsBtn button {
+    color: var(--text) !important;
+}
+
+body:has(#theme-toggle:checked) div#header {
+    background: #101010 !important;
+    color: var(--text) !important;
+}
+
+body:has(#theme-toggle:checked) div#header h2,
+body:has(#theme-toggle:checked) div#header p {
+    color: #ffffff !important;
+}
+
+body:has(#theme-toggle:checked) div#conteiner table td {
+    background: #050505 !important;
+    border-color: var(--line) !important;
+}
+
+body:has(#theme-toggle:checked) div#conteiner table td.stit {
+    background: #121212 !important;
+}
+
+body:has(#theme-toggle:checked) div#conteiner table#scheduleOral th,
+body:has(#theme-toggle:checked) div#conteiner table#scheduleOral td {
+    border-color: var(--line) !important;
+}
+
+body:has(#theme-toggle:checked) div#clsBtn button {
+    background: #050505 !important;
+    border-color: #3a3a3a !important;
+}
+
+@media (max-width: 640px) {
+    .theme-toggle-button {
+        top: max(0.75rem, env(safe-area-inset-top));
+        right: max(0.75rem, env(safe-area-inset-right));
+        padding: 0.55rem 0.78rem;
+        font-size: 0.72rem;
+    }
+}

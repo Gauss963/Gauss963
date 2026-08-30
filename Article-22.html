@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>What We Lose in Motion: Quantifying Image Degradation in Photo-to-Video Conversion | Gauss Chang</title>
+    <meta
+      name="description"
+      content="An experimental investigation into how converting static photos into video streams—such as adding music to Instagram Stories—degrades image fidelity through chroma subsampling, DCT quantization, and temporal encoder jitter."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Fraunces:opsz,wght@9..144,600;9..144,700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="article.css" />
+    <style>
+      .diff-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+        margin: 1.5rem 0 2rem;
+      }
+      .diff-grid figure {
+        margin: 0;
+        padding: 0.85rem;
+        display: flex;
+        flex-direction: column;
+        background: var(--surface-soft);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+      }
+      .diff-grid figure img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        object-fit: cover;
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+      }
+      .diff-grid figcaption {
+        margin-top: 0.75rem;
+        font-size: 0.84rem;
+        line-height: 1.5;
+        text-align: left;
+        color: var(--muted);
+      }
+      .diff-grid figcaption strong {
+        color: var(--text);
+        display: block;
+        margin-bottom: 0.2rem;
+      }
+      .diff-grid figcaption code {
+        font-size: 0.82em;
+        background: rgba(0, 0, 0, 0.05);
+        padding: 0.1em 0.35em;
+        border-radius: 4px;
+      }
+      .stat-table-wrapper {
+        overflow-x: auto;
+        margin: 1.8rem 0;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--surface-soft);
+      }
+      .stat-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        font-size: 0.9rem;
+        text-align: left;
+      }
+      .stat-table th,
+      .stat-table td {
+        padding: 0.85rem 1.1rem;
+        border-bottom: 1px solid var(--line);
+      }
+      .stat-table th {
+        background: rgba(0, 0, 0, 0.03);
+        color: var(--text);
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+      }
+      .stat-table tr:last-child td {
+        border-bottom: none;
+      }
+      .badge {
+        display: inline-block;
+        padding: 0.2em 0.55em;
+        font-size: 0.75rem;
+        font-weight: 700;
+        border-radius: 6px;
+        background: rgba(23, 54, 93, 0.1);
+        color: var(--accent);
+      }
+      .math-block {
+        display: block;
+        margin: 1.2rem auto;
+        padding: 0.9rem 1.4rem;
+        background: var(--surface-soft);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        text-align: center;
+        font-family: "Georgia", "Times New Roman", serif;
+        font-size: 1.05rem;
+        overflow-x: auto;
+        line-height: 2.2;
+      }
+      .frac {
+        display: inline-flex;
+        flex-direction: column;
+        vertical-align: middle;
+        text-align: center;
+        padding: 0 0.25em;
+        font-size: 0.9em;
+        line-height: 1;
+      }
+      .frac .top {
+        border-bottom: 1px solid currentColor;
+        padding-bottom: 2px;
+      }
+      .frac .bottom {
+        padding-top: 2px;
+      }
+      .parens {
+        font-size: 1.2em;
+        vertical-align: -0.05em;
+      }
+      @media (max-width: 900px) {
+        .diff-grid {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+      }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MTX5M07K9R"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-MTX5M07K9R");
+    </script>
+  </head>
+  <body class="article-page no-cover template-prose">
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="brand">
+          <a href="index.html" class="brand-mark" aria-label="National Taiwan University home">
+            <img src="images/logo/NTU-logo.svg" alt="National Taiwan University logo" class="brand-logo" />
+          </a>
+          <div>
+            <p class="eyebrow">National Taiwan University</p>
+            <a href="index.html" class="brand-name">Gauss Chang</a>
+          </div>
+        </div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="CV.html">About</a>
+          <a href="Projects.html">Research</a>
+          <a href="Articles.html" aria-current="page">Articles</a>
+          <a href="Contact.html">Contact</a>
+          <a href="https://www.ntu.edu.tw" target="_blank" rel="noopener noreferrer">NTU</a>
+        </nav>
+      </header>
+
+      <main class="page article-layout">
+        <article class="article-shell">
+          <header class="hero article-hero">
+            <p class="eyebrow">Experiment Notes</p>
+            <h1>What We Lose in Motion: Quantifying Image Degradation in Photo-to-Video Conversion</h1>
+            <div class="meta">Posted on 2026-08-21 · Keywords: Video Compression, H.264, Instagram Story, Chroma Subsampling, Image Fidelity, Temporal Stacking</div>
+            <p class="lead">
+              The moment you attach a background track to a crisp photo on Instagram Story, the image visibly degrades.
+              This article investigates the mathematical and structural mechanics of what is lost when a static still is forced
+              into a video container, using histogram-equalized difference mapping and multi-frame temporal stacking.
+            </p>
+          </header>
+
+          <div class="content article-content">
+            <p class="intro">
+              Almost everyone who cares about photography has noticed this quiet frustration: you upload a high-resolution,
+              tack-sharp photograph to an Instagram Story, and it looks immaculate. But the moment you add a 15-second music
+              sticker or an animated timestamp, the entire canvas softens. Edges blur slightly, smooth color gradients break into
+              faint stepped bands, and delicate textures turn into flat planes. To understand why this happens and quantify
+              exactly what information is stripped away, I built a controlled experimental pipeline dubbed <strong>VCR</strong>
+              (Video Compression Recovery).
+            </p>
+
+            <h2>The Root Cause: The Container Switch</h2>
+            <p>
+              The degradation is not a mystery of network throttling; it is an inevitable consequence of media architecture.
+              When an image is posted alone, mobile clients serve it as a static compressed bitmap (JPEG or WebP). Modern image
+              codecs preserve high spatial frequency details and full color fidelity with dedicated 2D compression tables.
+            </p>
+            <p>
+              However, digital container formats cannot interleave an independent audio stream (AAC) with a static image file.
+              The instant music is attached, the platform's ingest pipeline converts the static photo into an active video stream
+              (typically encoded via H.264/AVC or H.265/HEVC). This fundamental format transition introduces three distinct layers
+              of irreversible quality degradation:
+            </p>
+            <ul>
+              <li>
+                <strong>Chroma Subsampling (4:2:0):</strong> The full RGB color space is converted to YUV420p, immediately discarding
+                75% of chromatic spatial resolution by sharing single chrominance values across 2 &times; 2 pixel clusters.
+              </li>
+              <li>
+                <strong>DCT Quantization &amp; Macroblocking:</strong> Video encoders partition frames into 16 &times; 16 or
+                8 &times; 8 macroblocks. High spatial frequency discrete cosine transform (DCT) coefficients are aggressively
+                quantized because human vision tolerates high-frequency loss during motion—an assumption that completely fails
+                for static photography.
+              </li>
+              <li>
+                <strong>Temporal Noise &amp; Encoder Jitter:</strong> Even when feeding the exact same still image frame after frame,
+                temporal prediction loops, rate controllers, and inter-frame filters introduce subtle variations between adjacent
+                frames.
+              </li>
+            </ul>
+
+            <h2>The VCR Experimental Pipeline</h2>
+            <p>
+              To isolate and visualize these distortions systematically without relying on subjective visual inspection, I designed
+              an automated Python workflow using FFmpeg and NumPy:
+            </p>
+
+            <div class="route-card">
+              <p><strong>1. Source Ingestion:</strong> Ingest an uncompressed still photograph (<em>I</em><sub>orig</sub>).</p>
+              <p><strong>2. Video Encoding:</strong> Encode the still into a standard H.264 video stream (<code>libx264</code>, <code>yuv420p</code>, 1 fps) matching the native pixel dimensions of the source photograph for durations ranging from 45 seconds to 600 seconds.</p>
+              <p><strong>3. Single-Frame Extraction:</strong> Extract a target representative frame (<em>I</em><sub>frame</sub> at frame index 10).</p>
+              <p><strong>4. Multi-Frame Temporal Stacking:</strong> Decompose all <em>N</em> frames of the video and compute the temporal ensemble average:
+                <span class="math-block"><em>I</em><sub>stacked</sub> = <span class="frac"><span class="top">1</span><span class="bottom"><em>N</em></span></span> &sum;<sub><em>k</em>=1</sub><sup><em>N</em></sup> <em>I</em><sub><em>k</em></sub></span>
+                This temporal stacking operates as a low-pass temporal filter to test whether multi-frame noise averaging can cancel encoder fluctuations and reconstruct lost high-frequency details.
+              </p>
+              <p><strong>5. Diagnostic Difference Mapping:</strong> Compute three distinct difference maps using FFmpeg's histogram-equalized difference filter:
+                <br /><code>-filter_complex "blend=all_mode=difference,format=gray,histeq"</code>
+              </p>
+            </div>
+
+            <div class="callout">
+              <p><strong>Privacy &amp; Visualization Note:</strong></p>
+              <p>
+                To protect personal privacy while providing maximal diagnostic clarity, no original photographs or raw video frames
+                are displayed on this page. All figures shown below are the <strong>histogram-equalized difference maps</strong>.
+                Applying histogram equalization stretching (|<em>A</em> &minus; <em>B</em>| &rarr; gray &rarr; histeq) amplifies minute, sub-perceptual
+                quantization errors and phase shifts into high-contrast structural spectrograms, exposing macroblock boundaries,
+                ringing artifacts, and temporal drift patterns directly.
+              </p>
+            </div>
+
+            <h2>The Three Diagnostic Metrics</h2>
+            <p>For every test case, three difference maps are generated:</p>
+            <ol>
+              <li>
+                <strong><em>D</em><sub>FO</sub> (Original vs. Single Frame, <code>diff_fo</code>):</strong>
+                Quantifies total instantaneous single-frame degradation. It captures the combined distortion of 4:2:0 chroma downsampling,
+                DCT block truncation, and intra-frame quantization.
+              </li>
+              <li>
+                <strong><em>D</em><sub>SO</sub> (Original vs. Stacked Frame, <code>diff_so</code>):</strong>
+                Quantifies the permanent, irreversible data loss. Because temporal stacking cancels out random frame-to-frame noise,
+                any residual difference that remains in <em>D</em><sub>SO</sub> represents systematic, unrecoverable data erasure caused by the codec.
+              </li>
+              <li>
+                <strong><em>D</em><sub>FS</sub> (Single Frame vs. Stacked Frame, <code>diff_fs</code>):</strong>
+                Isolates intra-stream temporal noise and encoder jitter. It reveals how individual frames fluctuate over time despite the
+                input being an entirely static image.
+              </li>
+            </ol>
+
+            <h2>Experimental Matrix &amp; Summary</h2>
+            <div class="stat-table-wrapper">
+              <table class="stat-table">
+                <thead>
+                  <tr>
+                    <th>Case</th>
+                    <th>Resolution</th>
+                    <th>Duration / Frames</th>
+                    <th>Video Bitrate</th>
+                    <th>Key Characteristics Analyzed</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>CASE 1</strong></td>
+                    <td>720 × 1280 (9:16)</td>
+                    <td>45 sec (45 frames)</td>
+                    <td>210 kbps</td>
+                    <td>Mobile Story aspect ratio; heavy macroblock grid dominance</td>
+                  </tr>
+                  <tr>
+                    <td><strong>CASE 2</strong></td>
+                    <td>3024 × 4032 (12MP)</td>
+                    <td>60 sec (60 frames)</td>
+                    <td>657 kbps</td>
+                    <td>Native vertical capture; edge ringing and high-frequency texture loss</td>
+                  </tr>
+                  <tr>
+                    <td><strong>CASE 3</strong></td>
+                    <td>3024 × 4032 (12MP)</td>
+                    <td>60 sec (60 frames)</td>
+                    <td>900 kbps</td>
+                    <td>High-entropy textured scene; maximum codec bitrate allocation</td>
+                  </tr>
+                  <tr>
+                    <td><strong>CASE 4</strong></td>
+                    <td>3024 × 4032 (12MP)</td>
+                    <td>60 sec (60 frames)</td>
+                    <td>627 kbps</td>
+                    <td>Smooth tonal transitions; planar color banding &amp; chroma smearing</td>
+                  </tr>
+                  <tr>
+                    <td><strong>CASE 5</strong></td>
+                    <td>3024 × 4032 (12MP)</td>
+                    <td>60 sec (60 frames)</td>
+                    <td>637 kbps</td>
+                    <td>Standard 60-frame baseline for duration comparison</td>
+                  </tr>
+                  <tr>
+                    <td><strong>CASE 5-Long</strong></td>
+                    <td>3024 × 4032 (12MP)</td>
+                    <td>600 sec (600 frames)</td>
+                    <td>216 kbps</td>
+                    <td>Extended 10-minute stacking; reveals long-term encoder drift</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2>Case-by-Case Visual Comparisons</h2>
+
+            <!-- CASE 1 -->
+            <h3>CASE 1: Standard Mobile Story Format (720 × 1280)</h3>
+            <p>
+              CASE 1 simulates a standard 720p mobile story stream encoded for 45 seconds at 210 kbps. Because the spatial pixel
+              count is relatively low, standard 16 &times; 16 macroblock units occupy a substantial physical percentage of the viewport.
+            </p>
+            <div class="diff-grid">
+              <figure>
+                <img src="article-assets/article-22/case1-diff-fo.png" alt="CASE 1 - Original vs Single Frame Difference" loading="lazy" />
+                <figcaption>
+                  <strong>Figure 1A · Original vs. Single Frame (<code>diff_fo</code>)</strong>
+                  Prominent macroblock boundaries and high-frequency edge quantization are immediately visible across all structural contours.
+                </figcaption>
+              </figure>
+              <figure>
+                <img src="article-assets/article-22/case1-diff-so.png" alt="CASE 1 - Original vs Stacked Frame Difference" loading="lazy" />
+                <figcaption>
+                  <strong>Figure 1B · Original vs. Stacked (<code>diff_so</code>)</strong>
+                  Temporal stacking fails to eliminate the grid structure, proving that spatial block quantization is systematic and unrecoverable.
+                </figcaption>
+              </figure>
+              <figure>
+                <img src="article-assets/article-22/case1-diff-fs.png" alt="CASE 1 - Single Frame vs Stacked (<code>diff_fs</code>)" loading="lazy" />
+                <figcaption>
+                  <strong>Figure 1C · Single Frame vs. Stacked (<code>diff_fs</code>)</strong>
+                  Isolates subtle intra-stream variations between frame 10 and the 45-frame temporal mean.
+                </figcaption>
+              </figure>
+            </div>
+
+            <!-- CASE 2 -->
+            <h3>CASE 2: High-Resolution Native Capture (3024 × 4032)</h3>
+            <p>
+              In CASE 2, a full 12.2-megapixel mobile capture is encoded at 657 kbps. The spatial resolution is high, but the
+              allocated bitrate per pixel drops precipitously. The difference maps reveal dramatic high-frequency filtering.
+            </p>
+            <div class="diff-grid">
+              <figure>
+                <img src="article-assets/article-22/case2-diff-fo.png" alt="CASE 2 - Original vs Single Frame Difference" loading="lazy" />
+                <figcaption>
+                  <strong>Figure 2A · Original vs. Single Frame (<code>diff_fo</code>)</strong>
+                  High-contrast boundary halos illustrate phase errors and high-frequency coefficient cutoff along fine contours.
+                </figcaption>
+              </figure>
+              <figure>
+                <img src="article-assets/article-22/case2-diff-so.png" alt="CASE 2 - Original vs Stacked Frame Difference" loading="lazy" />
+                <figcaption>
+                  <strong>Figure 2B · Original vs. Stacked (<code>diff_so</code>)</strong>
+                  Averaging across 60 frames maintains nearly identical edge deviations, demonstrating the irreversibility of transform truncation.
+                </figcaption>
+              </figure>
+              <figure>
+                <img src="article-assets/article-22/case2-diff-fs.png" alt="CASE 2 - Single Frame vs Stacked (<code>diff_fs</code>)" loading="lazy" />
+                <figcaption>
+                  <strong>Figure 2C · Single Frame vs. Stacked (<code>diff_fs</code>)</strong>
+                  Residual temporal noise highlights subtle encoder rate-control fluctuations across static high-resolution blocks.
+                </figcaption>
+              </figure>
+            </div>
+
+            <!-- CASE 3 -->
+            <h3>CASE 3: High Texture Complexity &amp; High Entropy (3024 × 4032)</h3>
+            <p>
+              CASE 3 features a complex scene filled with micro-textures and dense details. The encoder’s rate-control algorithm
+              automatically allocated the highest bitrate in our test suite (900 kbps), yet the structural loss remains intense.
+            </p>
+            <div class="diff-grid">
+              <figure>
+                <img src="article-assets/article-22/case3-diff-fo.png" alt="CASE 3 - Original vs Single Frame Difference" loading="lazy" />
+                <figcaption>
+                  <strong>Figure 3A · Original vs. Single Frame (<code>diff_fo</code>)</strong>
+                  Dense energy across the entire frame indicates aggressive coefficient culling in high-frequency texture blocks.
+                </figcaption>
+              </figure>
+              <figure>
+                <img src="article-assets/article-22/case3-diff-so.png" alt="CASE 3 - Original vs Stacked Frame Difference" loading="lazy" />
+                <figcaption>
+                  <strong>Figure 3B · Original vs. Stacked (<code>diff_so</code>)</strong>
+                  The stacked difference map closely tracks Figure 3A, confirming that rich micro-textures cannot be reconstructed via temporal pooling.
+                </figcaption>
+              </figure>
+              <figure>
+                <img src="article-assets/article-22/case3-diff-fs.png" alt="CASE 3 - Single Frame vs Stacked (<code>diff_fs</code>)" loading="lazy" />
+                <figcaption>
+                  <strong>Figure 3C · Single Frame vs. Stacked (<code>diff_fs</code>)</strong>
+                  Fine-grained temporal variance distributed across high-frequency regions as the codec continuously adjusts local quantization.
+                </figcaption>
+              </figure>
+            </div>
+
+            <!-- CASE 4 -->
+            <h3>CASE 4: Tonal Gradients &amp; Smooth Field Boundaries (3024 × 4032)</h3>
+            <p>
+              CASE 4 evaluates performance across smooth luminance gradients and broader structural zones at 627 kbps.
+              This case demonstrates how video encoding handles continuous-tone transitions.
+            </p>
+            <div class="diff-grid">
+              <figure>
+                <img src="article-assets/article-22/case4-diff-fo.png" alt="CASE 4 - Original vs Single Frame Difference" loading="lazy" />
+                <figcaption>
+                  <strong>Figure 4A · Original vs. Single Frame (<code>diff_fo</code>)</strong>
+                  Planar macroblock stepping and chroma smearing become evident along subtle gradient transitions.
+                </figcaption>
+              </figure>
+              <figure>
+                <img src="article-assets/article-22/case4-diff-so.png" alt="CASE 4 - Original vs Stacked Frame Difference" loading="lazy" />
+                <figcaption>
+                  <strong>Figure 4B · Original vs. Stacked (<code>diff_so</code>)</strong>
+                  Quantization steps remain rigid in the stacked image, confirming persistent bit-depth reduction in smooth fields.
+                </figcaption>
+              </figure>
+              <figure>
+                <img src="article-assets/article-22/case4-diff-fs.png" alt="CASE 4 - Single Frame vs Stacked (<code>diff_fs</code>)" loading="lazy" />
+                <figcaption>
+                  <strong>Figure 4C · Single Frame vs. Stacked (<code>diff_fs</code>)</strong>
+                  Temporal differential reveals localized encoder dithering across continuous tonal zones.
+                </figcaption>
+              </figure>
+            </div>
+
+            <!-- CASE 5 vs CASE 5-Long -->
+            <h3>CASE 5 &amp; CASE 5-Long: Duration Scaling &amp; Long-Term Encoder Drift</h3>
+            <p>
+              To test the limits of multi-frame temporal stacking, CASE 5 (60 seconds, 60 frames) and CASE 5-Long (600 seconds, 600 frames)
+              were run on the exact same high-resolution photograph.
+            </p>
+            <p>
+              Over a 10-minute stationary stream, the encoder’s long-term rate control drops the average bitrate to 216 kbps as motion-vector
+              skips saturate the stream. Stacking 600 frames pushes the temporal ensemble average toward an asymptotic stationary limit.
+              Comparing <code>diff_fs</code> between CASE 5 and CASE 5-Long reveals a stark phenomenon:
+            </p>
+
+            <div class="diff-grid">
+              <figure>
+                <img src="article-assets/article-22/case5-diff-fo.png" alt="CASE 5 - Original vs Single Frame Difference" loading="lazy" />
+                <figcaption>
+                  <strong>Figure 5A · CASE 5: Original vs. Frame (<code>diff_fo</code>, 60s)</strong>
+                  Baseline single-frame compression envelope at 637 kbps.
+                </figcaption>
+              </figure>
+              <figure>
+                <img src="article-assets/article-22/case5-diff-so.png" alt="CASE 5 - Original vs. Stacked (<code>diff_so</code>, 60s)" loading="lazy" />
+                <figcaption>
+                  <strong>Figure 5B · CASE 5: Original vs. Stacked (<code>diff_so</code>, 60s)</strong>
+                  60-frame stacked residual showing persistent quantization boundaries.
+                </figcaption>
+              </figure>
+              <figure>
+                <img src="article-assets/article-22/case5-diff-fs.png" alt="CASE 5 - Single Frame vs. Stacked (<code>diff_fs</code>, 60s)" loading="lazy" />
+                <figcaption>
+                  <strong>Figure 5C · CASE 5: Frame vs. Stacked (<code>diff_fs</code>, 60s)</strong>
+                  Short-duration temporal variance (file size: 295 KB).
+                </figcaption>
+              </figure>
+            </div>
+
+            <div class="diff-grid">
+              <figure>
+                <img src="article-assets/article-22/case5-long-diff-fo.png" alt="CASE 5-Long - Original vs Single Frame Difference" loading="lazy" />
+                <figcaption>
+                  <strong>Figure 6A · CASE 5-Long: Original vs. Frame (<code>diff_fo</code>, 600s)</strong>
+                  Single frame extracted from the extended 10-minute stream.
+                </figcaption>
+              </figure>
+              <figure>
+                <img src="article-assets/article-22/case5-long-diff-so.png" alt="CASE 5-Long - Original vs. Stacked (<code>diff_so</code>, 600s)" loading="lazy" />
+                <figcaption>
+                  <strong>Figure 6B · CASE 5-Long: Original vs. Stacked (<code>diff_so</code>, 600s)</strong>
+                  600-frame ensemble average. Structural error remains completely unyielding.
+                </figcaption>
+              </figure>
+              <figure>
+                <img src="article-assets/article-22/case5-long-diff-fs.png" alt="CASE 5-Long - Single Frame vs. Stacked (<code>diff_fs</code>, 600s)" loading="lazy" />
+                <figcaption>
+                  <strong>Figure 6C · CASE 5-Long: Frame vs. Stacked (<code>diff_fs</code>, 600s)</strong>
+                  Extreme temporal differential (file size: 2.4 MB). 600-frame stacking cleanly isolates the complex encoder drift.
+                </figcaption>
+              </figure>
+            </div>
+
+            <div class="callout">
+              <p><strong>Key Insight from CASE 5 vs. CASE 5-Long:</strong></p>
+              <p>
+                In Figure 5C (60 frames), <code>diff_fs</code> appears relatively sparse because the 60-frame mean is still heavily
+                influenced by individual frame fluctuations. But in Figure 6C (600 frames), the 10-minute ensemble mean reaches a pure
+                stationary baseline. This causes the difference map file size to jump eightfold (from 295 KB to 2.4 MB), vividly exposing
+                how H.264 encoders periodically insert IDR refreshes, shift bit allocations, and drift across macroblocks over time
+                even when the source image has not changed by a single pixel.
+              </p>
+            </div>
+
+            <h2>Mechanics of What We Lose</h2>
+            <p>
+              Synthesizing the results across all six test cases reveals three mathematical realities of photo-to-video conversion:
+            </p>
+
+            <h3>1. The 75% Color Loss (YUV420p Subsampling)</h3>
+            <p>
+              Static photo viewers render in full RGB 4:4:4 or high-quality JPEG chroma schemes. Standard video distribution, however,
+              enforces YUV420p. In 4:2:0 subsampling, U and V chrominance channels are downsampled by a factor of 2 in both horizontal
+              and vertical dimensions. A 3024 &times; 4032 image contains roughly 12.2 million luma (<em>Y</em>) samples, but only 3.05 million
+              chroma (<em>U</em>, <em>V</em>) samples. Fine chromatic boundaries—such as red text against dark backgrounds or delicate skin color transitions—suffer
+              an immediate 4&times; reduction in spatial fidelity before any DCT compression even begins.
+            </p>
+
+            <h3>2. Loss of High Spatial Frequencies via DCT Quantization</h3>
+            <p>
+              Video codecs split frames into blocks and apply 2D Discrete Cosine Transforms:
+              <span class="math-block"><em>F</em>(<em>u</em>, <em>v</em>) = &sum;<sub><em>x</em>=0</sub><sup><em>N</em>&minus;1</sup> &sum;<sub><em>y</em>=0</sub><sup><em>N</em>&minus;1</sup> <em>f</em>(<em>x</em>, <em>y</em>) cos<span class="parens">[</span><span class="frac"><span class="top">&pi;</span><span class="bottom"><em>N</em></span></span>(<em>x</em> + <sup>1</sup>/<sub>2</sub>)<em>u</em><span class="parens">]</span> cos<span class="parens">[</span><span class="frac"><span class="top">&pi;</span><span class="bottom"><em>N</em></span></span>(<em>y</em> + <sup>1</sup>/<sub>2</sub>)<em>v</em><span class="parens">]</span></span>
+              The resulting frequency coefficients <em>F</em>(<em>u</em>, <em>v</em>) are divided by a quantization matrix <em>Q</em>(<em>u</em>, <em>v</em>) and rounded to the nearest integer.
+              In video codecs, <em>Q</em>(<em>u</em>, <em>v</em>) heavily penalizes high-frequency (<em>u</em>, <em>v</em>) terms because in moving video, the human visual system
+              experiences temporal motion blur and cannot resolve fine textures. When applied to a static photo, this quantization zeroes out
+              film grain, fabric textures, and subtle foliage details, turning them into flat blocks.
+            </p>
+
+            <h3>3. Irreversibility: Why Stacking Cannot Recover the Original</h3>
+            <p>
+              In classical signal processing, if noise is zero-mean and uncorrelated (E[&epsilon;] = 0), averaging <em>N</em> observations
+              reduces noise variance by a factor of &radic;<em>N</em>. However, our comparison between <em>D</em><sub>FO</sub> and <em>D</em><sub>SO</sub> across all test cases
+              proves that video compression error is predominantly <strong>deterministic and systematic</strong> (E[&epsilon;] &ne; 0).
+              Quantization is a truncation operator, not additive Gaussian noise. Once a high-frequency coefficient is quantized to zero,
+              no amount of multi-frame averaging can restore the truncated information.
+            </p>
+
+            <h2>Practical Takeaways for Creators</h2>
+            <p>
+              Understanding these underlying mechanics suggests concrete strategies when posting visual work on social platforms:
+            </p>
+            <ul>
+              <li>
+                <strong>Keep Still Images Static When Fidelity Matters:</strong> If the priority is showcasing fine photographic detail,
+                sharpness, or subtle color grades, avoid adding background music stickers or animated widgets that trigger video conversion.
+              </li>
+              <li>
+                <strong>Pre-Render in High-Quality Video Containers:</strong> If music or motion is essential, do not let mobile app
+                transcoders perform real-time downsampling on the fly. Pre-render the photo and audio in a dedicated video editor using a high
+                bitrate (&gt; 15 Mbps), explicit color primaries (Rec.709), and optimal 1080 &times; 1920 canvas scaling to minimize double-compression artifacts.
+              </li>
+              <li>
+                <strong>Increase Contrast on Key Edges:</strong> Because 4:2:0 subsampling blurs chroma boundaries, high-contrast luminance
+                edges survive video compression significantly better than subtle chromatic transitions.
+              </li>
+            </ul>
+
+            <div class="callout">
+              <p>
+                Video compression was engineered to make moving worlds feel smooth and lightweight across mobile networks.
+                It is a masterpiece of perceptual engineering for motion—but when asked to hold a single still photograph,
+                the very assumptions that make video efficient become the mechanisms that dismantle its quietest details.
+              </p>
+            </div>
+          </div>
+        </article>
+      </main>
+
+      <footer class="site-footer">
+        <p>© 2026 Gauss Chang.</p>
+        <a href="Articles.html">Articles</a>
+      </footer>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

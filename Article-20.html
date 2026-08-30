@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SCEC TPV101 Tatva vs. UGUCA vs. SPECFEM3D (standard mesh 100m) | Gauss Chang</title>
+    <meta
+      name="description"
+      content="A research log comparing Tatva, UGUCA, and SPECFEM3D results for the SCEC TPV101 benchmark using a 100 m standard mesh."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Fraunces:opsz,wght@9..144,600;9..144,700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="article.css" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MTX5M07K9R"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-MTX5M07K9R");
+    </script>
+  </head>
+  <body class="article-page no-cover template-prose">
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="brand">
+          <a href="index.html" class="brand-mark" aria-label="National Taiwan University home">
+            <img src="images/logo/NTU-logo.svg" alt="National Taiwan University logo" class="brand-logo" />
+          </a>
+          <div>
+            <p class="eyebrow">National Taiwan University</p>
+            <a href="index.html" class="brand-name">Gauss Chang</a>
+          </div>
+        </div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="CV.html">About</a>
+          <a href="Projects.html">Research</a>
+          <a href="Articles.html" aria-current="page">Articles</a>
+          <a href="Contact.html">Contact</a>
+          <a href="https://www.ntu.edu.tw" target="_blank" rel="noopener noreferrer">NTU</a>
+        </nav>
+      </header>
+
+      <main class="page article-layout">
+        <article class="article-shell">
+          <header class="hero article-hero">
+            <p class="eyebrow">Research Log</p>
+            <h1>SCEC TPV101 Tatva vs. UGUCA vs. SPECFEM3D (standard mesh 100m)</h1>
+            <div class="meta">Posted on 2026-08-12 · Keywords: Simulation, SCEC, TPV101, Tatva, UGUCA, SPECFEM3D</div>
+            <p class="lead">
+              A validation log comparing Tatva against UGUCA and SPECFEM3D for the SCEC TPV101 benchmark using the standard
+              100 m mesh, with rupture-time, fault-station, accuracy, and runtime results shown directly from the PDF outputs.
+            </p>
+          </header>
+
+          <div class="content article-content">
+            <h2>Methods</h2>
+            <h3>UGUCA</h3>
+            <p>
+              UGUCA uses the spectral boundary integral method to simulate dynamic and quasi-dynamic rupture propagation along
+              a weak interface between two semi-infinite half-planes.
+            </p>
+
+            <h3>SPECFEM3D</h3>
+            <p>
+              The SPECFEM codes use the spectral-element method to simulate seismic wave propagation across different scales.
+              Together with dedicated inversion tools, they form a computational-seismology ecosystem for topics including seismic
+              tomography and ground-shaking hazard analysis.
+            </p>
+
+            <h3>Tatva</h3>
+            <p>
+              Tatva is a pure Python finite-element library built on the JAX ecosystem, making it possible to use FEM workflows in
+              a differentiable setting.
+            </p>
+
+            <h2>Simulation Setup and Output</h2>
+            <figure class="pdf-figure">
+              <div class="pdf-heading">
+                <h3>SCEC Validation: Ageing Law</h3>
+                <a href="article-assets/article-20/SCEC_validation_ageing_law.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+              </div>
+              <object data="article-assets/article-20/SCEC_validation_ageing_law.pdf" type="application/pdf" aria-label="SCEC validation ageing law PDF">
+                <p>Your browser cannot display this PDF. <a href="article-assets/article-20/SCEC_validation_ageing_law.pdf">Open the PDF</a>.</p>
+              </object>
+              <figcaption>SCEC benchmark description. TPV101 output does not include free-surface stations.</figcaption>
+            </figure>
+
+            <h2>Results</h2>
+            <p>UGUCA and SPECFEM3D are used as the reference solutions in the comparisons below.</p>
+
+            <h3>Rupture-Time Comparison</h3>
+            <figure class="pdf-figure">
+              <div class="pdf-heading">
+                <h3>Early Rupture-Time Contours</h3>
+                <a href="article-assets/article-20/rupture_time_contours_early_comparison.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+              </div>
+              <object data="article-assets/article-20/rupture_time_contours_early_comparison.pdf" type="application/pdf" aria-label="TPV101 early rupture-time contour comparison PDF">
+                <p>Your browser cannot display this PDF. <a href="article-assets/article-20/rupture_time_contours_early_comparison.pdf">Open the PDF</a>.</p>
+              </object>
+              <figcaption>Early rupture-time contours from Tatva and the reference solutions.</figcaption>
+            </figure>
+
+            <figure class="pdf-figure">
+              <div class="pdf-heading">
+                <h3>Rupture-Time Contour Overlay</h3>
+                <a href="article-assets/article-20/rupture_time_contour_overlay.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+              </div>
+              <object data="article-assets/article-20/rupture_time_contour_overlay.pdf" type="application/pdf" aria-label="TPV101 rupture-time contour overlay PDF">
+                <p>Your browser cannot display this PDF. <a href="article-assets/article-20/rupture_time_contour_overlay.pdf">Open the PDF</a>.</p>
+              </object>
+              <figcaption>Overlay of rupture-time contours for direct visual comparison.</figcaption>
+            </figure>
+
+            <h3>Fault-Station Fields</h3>
+            <figure class="pdf-figure">
+              <div class="pdf-heading">
+                <h3>Horizontal Shear Stress</h3>
+                <a href="article-assets/article-20/tatva_ke_kaneko_comparison_h-shear-stress.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+              </div>
+              <object data="article-assets/article-20/tatva_ke_kaneko_comparison_h-shear-stress.pdf" type="application/pdf" aria-label="TPV101 horizontal shear stress comparison PDF">
+                <p>Your browser cannot display this PDF. <a href="article-assets/article-20/tatva_ke_kaneko_comparison_h-shear-stress.pdf">Open the PDF</a>.</p>
+              </object>
+              <figcaption>Horizontal shear-stress histories from Tatva and the reference solutions.</figcaption>
+            </figure>
+
+            <figure class="pdf-figure">
+              <div class="pdf-heading">
+                <h3>Horizontal Slip Rate</h3>
+                <a href="article-assets/article-20/tatva_ke_kaneko_comparison_h-slip-rate.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+              </div>
+              <object data="article-assets/article-20/tatva_ke_kaneko_comparison_h-slip-rate.pdf" type="application/pdf" aria-label="TPV101 horizontal slip-rate comparison PDF">
+                <p>Your browser cannot display this PDF. <a href="article-assets/article-20/tatva_ke_kaneko_comparison_h-slip-rate.pdf">Open the PDF</a>.</p>
+              </object>
+              <figcaption>Horizontal slip-rate histories at the benchmark fault stations.</figcaption>
+            </figure>
+
+            <figure class="pdf-figure">
+              <div class="pdf-heading">
+                <h3>Horizontal Slip</h3>
+                <a href="article-assets/article-20/tatva_ke_kaneko_comparison_h-slip.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+              </div>
+              <object data="article-assets/article-20/tatva_ke_kaneko_comparison_h-slip.pdf" type="application/pdf" aria-label="TPV101 horizontal slip comparison PDF">
+                <p>Your browser cannot display this PDF. <a href="article-assets/article-20/tatva_ke_kaneko_comparison_h-slip.pdf">Open the PDF</a>.</p>
+              </object>
+              <figcaption>Horizontal slip histories at the benchmark fault stations.</figcaption>
+            </figure>
+
+            <figure class="pdf-figure">
+              <div class="pdf-heading">
+                <h3>State Variable log(theta)</h3>
+                <a href="article-assets/article-20/tatva_ke_kaneko_comparison_log-theta.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+              </div>
+              <object data="article-assets/article-20/tatva_ke_kaneko_comparison_log-theta.pdf" type="application/pdf" aria-label="TPV101 state-variable comparison PDF">
+                <p>Your browser cannot display this PDF. <a href="article-assets/article-20/tatva_ke_kaneko_comparison_log-theta.pdf">Open the PDF</a>.</p>
+              </object>
+              <figcaption>Comparison of the logarithmic rate-and-state state variable.</figcaption>
+            </figure>
+
+            <figure class="pdf-figure">
+              <div class="pdf-heading">
+                <h3>Normal Stress</h3>
+                <a href="article-assets/article-20/tatva_ke_kaneko_comparison_n-stress.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+              </div>
+              <object data="article-assets/article-20/tatva_ke_kaneko_comparison_n-stress.pdf" type="application/pdf" aria-label="TPV101 normal stress comparison PDF">
+                <p>Your browser cannot display this PDF. <a href="article-assets/article-20/tatva_ke_kaneko_comparison_n-stress.pdf">Open the PDF</a>.</p>
+              </object>
+              <figcaption>Normal-stress histories from Tatva and the reference solutions.</figcaption>
+            </figure>
+
+            <figure class="pdf-figure">
+              <div class="pdf-heading">
+                <h3>Vertical Shear Stress</h3>
+                <a href="article-assets/article-20/tatva_ke_kaneko_comparison_v-shear-stress.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+              </div>
+              <object data="article-assets/article-20/tatva_ke_kaneko_comparison_v-shear-stress.pdf" type="application/pdf" aria-label="TPV101 vertical shear stress comparison PDF">
+                <p>Your browser cannot display this PDF. <a href="article-assets/article-20/tatva_ke_kaneko_comparison_v-shear-stress.pdf">Open the PDF</a>.</p>
+              </object>
+              <figcaption>Vertical shear-stress histories at the benchmark fault stations.</figcaption>
+            </figure>
+
+            <figure class="pdf-figure">
+              <div class="pdf-heading">
+                <h3>Vertical Slip Rate</h3>
+                <a href="article-assets/article-20/tatva_ke_kaneko_comparison_v-slip-rate.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+              </div>
+              <object data="article-assets/article-20/tatva_ke_kaneko_comparison_v-slip-rate.pdf" type="application/pdf" aria-label="TPV101 vertical slip-rate comparison PDF">
+                <p>Your browser cannot display this PDF. <a href="article-assets/article-20/tatva_ke_kaneko_comparison_v-slip-rate.pdf">Open the PDF</a>.</p>
+              </object>
+              <figcaption>Vertical slip-rate histories at the benchmark fault stations.</figcaption>
+            </figure>
+
+            <figure class="pdf-figure">
+              <div class="pdf-heading">
+                <h3>Vertical Slip</h3>
+                <a href="article-assets/article-20/tatva_ke_kaneko_comparison_v-slip.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+              </div>
+              <object data="article-assets/article-20/tatva_ke_kaneko_comparison_v-slip.pdf" type="application/pdf" aria-label="TPV101 vertical slip comparison PDF">
+                <p>Your browser cannot display this PDF. <a href="article-assets/article-20/tatva_ke_kaneko_comparison_v-slip.pdf">Open the PDF</a>.</p>
+              </object>
+              <figcaption>Vertical slip histories at the benchmark fault stations.</figcaption>
+            </figure>
+
+            <h3>Error Summary</h3>
+            <figure class="pdf-figure">
+              <div class="pdf-heading">
+                <h3>Station-Normalized RMS Difference</h3>
+                <a href="article-assets/article-20/station_normalized_rms_difference.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+              </div>
+              <object data="article-assets/article-20/station_normalized_rms_difference.pdf" type="application/pdf" aria-label="TPV101 station-normalized RMS difference PDF">
+                <p>Your browser cannot display this PDF. <a href="article-assets/article-20/station_normalized_rms_difference.pdf">Open the PDF</a>.</p>
+              </object>
+              <figcaption>Normalized RMS differences across the selected fault stations and output fields.</figcaption>
+            </figure>
+
+            <p>
+              Tatva 的模擬結果與 UGUCA 相近。部分位置的 horizontal shear stress 在 <em>t</em> &gt; 10 s 後沒有像
+              UGUCA 與 SPECFEM3D 一樣下降，反而呈現上升趨勢；不過整體結果令人滿意。
+            </p>
+
+            <h2>Runtime</h2>
+            <ul>
+              <li>創進一號，OpenMPI，56 cores: 36:45:23, NT$207.</li>
+              <li>NANO4，single H200 GPU: 03:45:23, NT$113.</li>
+            </ul>
+            <p>CPU 與 GPU 的模擬結果沒有差異；使用 MPI 與不使用 MPI 的結果也沒有差異。</p>
+
+            <h2>Conclusion</h2>
+            <ul>
+              <li>Tatva + RSF 的結果可用，後續將套用至 PMMA 模擬。</li>
+              <li>相較於 CPU，GPU 模擬不僅更經濟，也明顯更快。</li>
+            </ul>
+          </div>
+        </article>
+      </main>
+
+      <footer class="site-footer">
+        <p>© 2026 Gauss Chang.</p>
+        <a href="Articles.html">Articles</a>
+      </footer>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

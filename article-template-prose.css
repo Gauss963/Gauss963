@@ -1,0 +1,119 @@
+body.article-page.template-prose figure,
+body.article-page.template-prose .callout,
+body.article-page.template-prose .route-card,
+body.article-page.template-prose blockquote {
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: none;
+}
+
+body.article-page.template-prose .callout,
+body.article-page.template-prose .route-card {
+  padding: 1.2rem 1.3rem;
+}
+
+body.article-page.template-prose .callout {
+  border-left: 3px solid var(--line-strong);
+}
+
+body.article-page.template-prose .route-card p:last-of-type {
+  margin-bottom: 0;
+}
+
+body.article-page.template-prose figure {
+  margin: 1.5rem 0 2rem;
+  padding: 1rem;
+}
+
+body.article-page.template-prose figure img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.1);
+}
+
+body.article-page.template-prose figure object {
+  display: block;
+  width: 100%;
+  height: 520px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+body.article-page.template-prose .pdf-figure {
+  margin-top: 1.2rem;
+}
+
+body.article-page.template-prose .pdf-figure object {
+  height: min(72vh, 680px);
+  min-height: 520px;
+}
+
+body.article-page.template-prose .pdf-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.9rem;
+}
+
+body.article-page.template-prose .pdf-heading h3 {
+  margin: 0;
+}
+
+body.article-page.template-prose .pdf-heading a {
+  flex: 0 0 auto;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+body.article-page.template-prose figcaption {
+  margin-top: 0.8rem;
+  color: var(--muted);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+body.article-page.template-prose blockquote {
+  margin: 1.8rem 0;
+  padding: 1.2rem 1.4rem;
+  border-left: 3px solid var(--line-strong);
+}
+
+body.article-page.template-prose .summary-img {
+  width: min(100%, 720px);
+  height: auto;
+}
+
+@media (max-width: 720px) {
+  body.article-page.template-prose figure,
+  body.article-page.template-prose .callout,
+  body.article-page.template-prose .route-card,
+  body.article-page.template-prose blockquote {
+    border-radius: 16px;
+  }
+
+  body.article-page.template-prose figure object {
+    height: 360px;
+  }
+
+  body.article-page.template-prose .pdf-figure object {
+    height: 430px;
+    min-height: 430px;
+  }
+
+  body.article-page.template-prose .pdf-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+}

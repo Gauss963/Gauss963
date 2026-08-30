@@ -1,0 +1,379 @@
+@charset "UTF-8";
+* {
+    font-family: "Hiragino Kaku Gothic ProN","メイリオ", sans-serif;
+    font-size: 12px;
+}
+body {
+	margin: 0;
+	padding: 0;
+}
+div#conteiner {
+    margin: 0 auto;
+    width: 850px;
+}
+div#header {
+	background: #E0DCE8;
+	text-align: center;
+	padding-top: 2px;
+	padding-bottom: 1px;
+	font-size: 18px;
+}
+div#header img {
+	vertical-align: -13px;
+}
+div#header p {
+	font-size: 18px;
+    display: inline-block;
+}
+div#header h2 {
+	display: inline-block;
+	font-size: 28px;
+	color: #2d579a;
+	margin: 0 20px;
+}
+div#conteiner table {
+    width: 830px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+div#conteiner table th {
+    text-align: left;
+    font-size: 16px;
+    font-weight: normal;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+/* ユニオン */
+div#conteiner table th.scU {
+    background: #CD5C5C;
+    color: #FFFFFF;
+    padding-left: 15px;
+}
+/* パブリック */
+div#conteiner table th.scO {
+    background: #FF7F50;
+    color: #FFFFFF;
+    padding-left: 15px;
+}
+/* 宇宙惑星科学 */
+div#conteiner table th.scP {
+    background: #666699;
+    color: #FFFFFF;
+    padding-left: 15px;
+}
+/* 大気水圏科学 */
+div#conteiner table th.scA {
+    background: #3399CC;
+    color: #FFFFFF;
+    padding-left: 15px;
+}
+/* 地球人間圏科学 */
+div#conteiner table th.scH {
+    background: #669966;
+    color: #FFFFFF;
+    padding-left: 15px;
+}
+/* 固体地球科学 */
+div#conteiner table th.scS {
+    background: #AA9933;
+    color: #FFFFFF;
+    padding-left: 15px;
+}
+/* 地球生命科学 */
+div#conteiner table th.scB {
+    background: #E19AB3;
+    color: #FFFFFF;
+    padding-left: 15px;
+}
+/* 教育・アウトリーチ */
+div#conteiner table th.scG {
+    background: #DED581;
+    color: #FFFFFF;
+    padding-left: 15px;
+}
+/* 領域外・複数領域 */
+div#conteiner table th.scM {
+    background: #98B1BA;
+    color: #FFFFFF;
+    padding-left: 15px;
+}
+
+
+/* セクション企画*/
+div#conteiner table th.scL {
+    background: #726767;
+    color: #FFFFFF;
+    padding-left: 15px;
+}
+
+/* 緊急セッション */
+div#conteiner table th.scLB {
+    background: #ba1c70;
+    color: #FFFFFF;
+    padding-left: 15px;
+}
+
+div#conteiner table td {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #B9C1CE;
+	word-break: normal;
+}
+div#conteiner table td.stit {
+    background: #E6EAF2;
+}
+div#conteiner table td.cst {
+    width: 100px;
+}
+div#conteiner table td.sub {
+    text-align: center;
+    width: 75px;
+}
+div#conteiner table td.con {
+    width:125px;
+}
+div#conteiner table td ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+div#conteiner table td ul li {
+	font-size: 14px;
+	padding: 2px;
+}
+
+div#conteiner table td.diver {
+    text-align: center;
+    width: 100px;
+}
+
+div#clsBtn {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+div#clsBtn button {
+    width: 200px;
+    height: 50px;
+    border:none;
+    border-radius: 5px;
+    border: 1px solid #A9A9A9;
+    -webkit-transition: all .3s;
+	transition: all .3s;
+}
+div#clsBtn button.btU:hover {
+    background: #CD5C5C;
+	color: #FFFFFF;
+}
+div#clsBtn button.btO:hover {
+    background: #FF7F50;
+	color: #FFFFFF;
+}
+div#clsBtn button.btP:hover {
+    background: #666699;
+	color: #FFFFFF;
+}
+div#clsBtn button.btA:hover {
+    background: #3399CC;
+	color: #FFFFFF;
+}
+div#clsBtn button.btH:hover {
+    background: #669966;
+	color: #FFFFFF;
+}
+div#clsBtn button.btS:hover {
+    background: #AA9933;
+    color: #FFFFFF;
+}
+div#clsBtn button.btB:hover {
+    background: #E19AB3;
+	color: #FFFFFF;
+}
+div#clsBtn button.btG:hover {
+    background: #DED581;
+	color: #FFFFFF;
+}
+div#clsBtn button.btM:hover {
+    background: #98B1BA;
+	color: #FFFFFF;
+}
+/* 発表情報 */
+div#conteiner table#scheduleOral {
+	width: 830px;
+	margin: 0 auto;
+	border-collapse: collapse;
+	table-layout: fixed;
+	box-sizing: border-box;
+	margin-top: 20px;
+}
+div#conteiner table#scheduleOral th {
+	height: 20px;
+	font-size: 12px;
+	border: 1px solid #999;
+	text-align: center;
+}
+div#conteiner table#scheduleOral th:nth-of-type(1) {
+	width: 110px;
+}
+div#conteiner table#scheduleOral th:nth-of-type(2) {
+	width: 100px;
+}
+div#conteiner table#scheduleOral th:nth-of-type(3) {
+	
+}
+div#conteiner table#scheduleOral th:nth-of-type(4) {
+	width: 125px;
+}
+div#conteiner table#scheduleOral th:nth-of-type(5) {
+	width: 80px;
+}
+div#conteiner table#scheduleOral td {
+	height: 20px;
+	font-size: 13px;
+	border: 1px solid #999;
+}
+div#conteiner table#scheduleOral td:nth-of-type(1),
+div#conteiner table#scheduleOral td:nth-of-type(2),
+div#conteiner table#scheduleOral td:nth-of-type(5) {
+	text-align: center;
+}
+div#conteiner table#scheduleOral td.timeHeader {
+	font-size: 16px;
+	color: #FFF;
+}
+div#conteiner table#scheduleOral td.symU {
+	background: #CD5C5C;
+}
+div#conteiner table#scheduleOral td.symO {
+	background: #FF7F50;
+}
+div#conteiner table#scheduleOral td.symP {
+	background: #666699;
+}
+div#conteiner table#scheduleOral td.symA {
+	background: #3399CC;
+}
+div#conteiner table#scheduleOral td.symH {
+	background: #669966;
+}
+div#conteiner table#scheduleOral td.symS {
+	background: #AA9933;
+}
+div#conteiner table#scheduleOral td.symB {
+	background: #E19AB3;
+}
+div#conteiner table#scheduleOral td.symG {
+	background: #DED581;
+}
+div#conteiner table#scheduleOral td.symM {
+	background: #98B1BA;
+}
+div#conteiner table#schedulePoster {
+	width: 830px;
+	margin: 0 auto;
+	border-collapse: collapse;
+	table-layout: fixed;
+	box-sizing: border-box;
+	margin-top: 20px;
+}
+div#conteiner table#schedulePoster th {
+	height: 20px;
+	font-size: 12px;
+	border: 1px solid #999;
+	text-align: center;
+}
+div#conteiner table#schedulePoster th:nth-of-type(1) {
+	width: 110px;
+}
+div#conteiner table#schedulePoster th:nth-of-type(2) {
+
+}
+div#conteiner table#schedulePoster th:nth-of-type(3) {
+	width: 125px;
+}
+div#conteiner table#schedulePoster th:nth-of-type(4) {
+	width: 80px;
+}
+div#conteiner table#schedulePoster td {
+	height: 20px;
+	font-size: 13px;
+	border: 1px solid #999;
+}
+div#conteiner table#schedulePoster td:nth-of-type(1),
+div#conteiner table#schedulePoster td:nth-of-type(4) {
+	text-align: center;
+}
+div#conteiner table#schedulePoster td.timeHeader {
+	font-size: 16px;
+	color: #FFF;
+}
+div#conteiner table#schedulePoster td.symU {
+	background: #CD5C5C;
+}
+div#conteiner table#schedulePoster td.symO {
+	background: #FF7F50;
+}
+div#conteiner table#schedulePoster td.symP {
+	background: #666699;
+}
+div#conteiner table#schedulePoster td.symA {
+	background: #3399CC;
+}
+div#conteiner table#schedulePoster td.symH {
+	background: #669966;
+}
+div#conteiner table#schedulePoster td.symS {
+	background: #AA9933;
+}
+div#conteiner table#schedulePoster td.symB {
+	background: #E19AB3;
+}
+div#conteiner table#schedulePoster td.symG {
+	background: #DED581;
+}
+div#conteiner table#schedulePoster td.symM {
+	background: #98B1BA;
+}
+
+
+.language_change{
+display:block;
+width:100px;
+line-height: 25px;
+text-align:center;
+margin-top:10px;
+background-color:#d93122;
+color:#fff;
+font-weight: bold;
+float:right;
+}
+
+.language_change A{
+display:block;
+text-decoration:none;
+color: #fff;
+}
+
+.joint{
+display:block;
+width:100px;
+line-height: 20px;
+text-align:center;
+margin-top:7px;
+background-color:#E58105;
+color:#fff;
+}
+
+.joint A{
+display:block;
+text-decoration:none;
+color: #fff;
+}
+
+

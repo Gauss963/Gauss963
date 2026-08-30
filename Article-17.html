@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verbatim: A Local macOS App for Audio and Video Transcription | Gauss Chang</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Fraunces:opsz,wght@9..144,600;9..144,700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="article.css" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MTX5M07K9R"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-MTX5M07K9R");
+    </script>
+  </head>
+  <body class="article-page no-cover template-prose">
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="brand">
+          <a href="index.html" class="brand-mark" aria-label="National Taiwan University home">
+            <img src="images/logo/NTU-logo.svg" alt="National Taiwan University logo" class="brand-logo" />
+          </a>
+          <div>
+            <p class="eyebrow">National Taiwan University</p>
+            <a href="index.html" class="brand-name">Gauss Chang</a>
+          </div>
+        </div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="CV.html">About</a>
+          <a href="Projects.html">Research</a>
+          <a href="Articles.html" aria-current="page">Articles</a>
+          <a href="Contact.html">Contact</a>
+          <a href="https://www.ntu.edu.tw" target="_blank" rel="noopener noreferrer">NTU</a>
+        </nav>
+      </header>
+
+      <main class="page article-layout">
+        <article class="article-shell">
+          <header class="hero article-hero">
+            <p class="eyebrow">Software</p>
+            <h1>Verbatim: A Local macOS App for Audio and Video Transcription</h1>
+            <div class="meta">Posted on 2026-06-21 · Keywords: macOS app, Transcription, Whisper, Offline</div>
+            <p class="lead">
+              I recently built <a href="https://github.com/Gauss963/Verbatim" target="_blank" rel="noopener noreferrer">Verbatim</a>,
+              a native macOS transcription app that runs Whisper locally and turns audio or video files into readable transcripts
+              without sending media to a cloud service.
+            </p>
+          </header>
+
+          <div class="content article-content">
+            <p class="intro">
+              The idea behind Verbatim is simple: transcription should feel fast, private, and native. Instead of uploading files
+              to a remote server, Verbatim keeps everything on the Mac itself. You drop a file into the queue, choose a language,
+              start the run, and review the result in a transcript view designed for reading and playback side by side.
+            </p>
+
+            <h2>Why I Built It</h2>
+            <p>
+              A lot of transcription tools are convenient, but they also assume you are willing to upload recordings somewhere else.
+              That is not always ideal, especially when the source material is personal, research-related, or simply large enough to
+              make cloud workflows annoying. I wanted something that behaved more like a real Mac app: local files in, local results out,
+              and no unnecessary friction in between.
+            </p>
+            <p>
+              Verbatim is built in SwiftUI and uses Whisper large-v3 locally, so the app is intentionally opinionated. It prioritizes
+              privacy, offline use, and a focused interface over an everything-and-the-kitchen-sink feature list.
+            </p>
+
+            <h2>What Verbatim Can Do</h2>
+            <ul>
+              <li>Run Whisper large-v3 locally on macOS.</li>
+              <li>Accept both audio and video files through drag and drop or the file picker.</li>
+              <li>Support language selection for Auto, Chinese, and English.</li>
+              <li>Show queue state, run progress, and failure status clearly.</li>
+              <li>Provide a large, readable transcript view with copy support.</li>
+              <li>Sync playback with highlighted transcript segments.</li>
+              <li>Show video preview when the source file is a video.</li>
+            </ul>
+
+            <h2>Supported Media Formats</h2>
+            <p>
+              The current build accepts common formats including <code>.mp3</code>, <code>.mp4</code>, <code>.m4a</code>,
+              <code>.wav</code>, <code>.aiff</code>, <code>.aif</code>, <code>.mov</code>, <code>.aac</code>, and <code>.flac</code>.
+            </p>
+
+            <h2>Download</h2>
+            <div class="route-card">
+              <p>
+                <strong>Direct download:</strong>
+                <a href="verbatim/Verbatim-macOS-arm64-v1.0.2.zip">Verbatim-macOS-arm64-v1.0.2.zip</a>
+              </p>
+              <p>
+                <strong>Source code:</strong>
+                <a href="https://github.com/Gauss963/Verbatim" target="_blank" rel="noopener noreferrer">Gauss963/Verbatim on GitHub</a>
+              </p>
+              <p>
+                <strong>Target platform:</strong> Apple silicon Mac, macOS 15.7 or newer.
+              </p>
+              <p>
+                <strong>Package note:</strong> The app bundle includes the Whisper large-v3 model, so the zip is large.
+              </p>
+            </div>
+
+            <h2>If macOS Blocks the App on First Launch</h2>
+            <p>
+              This build is currently distributed without Apple notarization, so macOS may block it the first time you try to open it.
+              If that happens, you can still run it manually through System Settings.
+            </p>
+            <div class="callout">
+              <p><strong>How to open it anyway:</strong></p>
+              <ol>
+                <li>Unzip <code>Verbatim-macOS-arm64-v1.0.2.zip</code>.</li>
+                <li>Try opening <code>Verbatim.app</code> once so macOS shows the warning.</li>
+                <li>Open <strong>System Settings</strong> and go to <strong>Privacy &amp; Security</strong>.</li>
+                <li>Scroll down until you see the message saying Verbatim was blocked from opening.</li>
+                <li>Click <strong>Open Anyway</strong> and confirm in the next dialog.</li>
+              </ol>
+            </div>
+            <p>
+              If you prefer, you can also Control-click the app in Finder and choose <strong>Open</strong>. In practice, the important
+              idea is the same: macOS needs one manual confirmation before the app is allowed to run.
+            </p>
+
+            <h2>Current Direction</h2>
+            <p>
+              Right now Verbatim is focused on the core local transcription experience: import media, run Whisper, read the transcript,
+              and follow playback. There is still room to improve signing, release automation, and progress feedback, but even in its
+              current form it already does the part I care about most: making local transcription on macOS feel practical and pleasant.
+            </p>
+          </div>
+        </article>
+      </main>
+
+      <footer class="site-footer">
+        <p>© 2026 Gauss Chang.</p>
+        <a href="Articles.html">Articles</a>
+      </footer>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
