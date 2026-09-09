@@ -49,6 +49,7 @@ Current examples:
 - `Article-20.html`
 - `Article-21.html`
 - `Article-22.html`
+- `Article-23.html`
 
 ### 2. `article-template-note.css`
 

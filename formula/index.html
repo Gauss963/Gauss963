@@ -1,0 +1,24 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>formula</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #101010; }
+  #game { display: block; width: 100%; height: 100%; }
+</style>
+<canvas id="game"></canvas>
+<script>
+  // Pick the model with ?model=<name>, e.g. index.html?model=catbus
+  const MODELS = ["cube", "penger", "totoro", "300sl", "964", "w201", "catbus"]
+  const wanted = new URLSearchParams(location.search).get("model")
+  const model = MODELS.includes(wanted) ? wanted : "964"
+  document.title = model + " · formula"
+
+  // Dynamically inserted scripts are async by default; async = false keeps them
+  // in insertion order, so the model is defined before index.js reads it.
+  for (const src of [model + ".js", "index.js"]) {
+      const script = document.createElement("script")
+      script.src = src
+      script.async = false
+      document.head.appendChild(script)
+  }
+</script>
