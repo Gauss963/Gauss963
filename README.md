@@ -67,7 +67,7 @@ published with GitHub Pages at **<https://gauss963.github.io/Gauss963/>**.
 | Page | File | Contents |
 |------|------|----------|
 | Home | [`index.html`](https://github.com/Gauss963/Gauss963/blob/main/index.html) | Overview, research directions, highlights, timeline |
-| About | [`CV.html`](https://github.com/Gauss963/Gauss963/blob/main/CV.html) | Education, research experience, honors, publications ([PDF](https://github.com/Gauss963/Gauss963/blob/main/CV/CV-2P.pdf)) |
+| About | [`CV.html`](https://github.com/Gauss963/Gauss963/blob/main/CV.html) | Education, research experience, honors, publications ([PDF](https://github.com/Gauss963/Gauss963/blob/main/CV/Gauss_Chang_CV.pdf)) |
 | Research | [`Projects.html`](https://github.com/Gauss963/Gauss963/blob/main/Projects.html) | Research software, computational tools, academic templates |
 | Articles | [`Articles.html`](https://github.com/Gauss963/Gauss963/blob/main/Articles.html) | Chronological archive of notes, essays, conference updates, translations |
 | Contact | [`Contact.html`](https://github.com/Gauss963/Gauss963/blob/main/Contact.html) | Email, academic links, campus location | -->
