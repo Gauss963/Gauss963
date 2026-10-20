@@ -71,16 +71,6 @@ window.ARTICLE_INDEX = [
     ]
   },
   {
-    "href": "Article-16.html",
-    "title": "The Ultimate Answer to Life, the Universe, and Everything",
-    "date": "2026-04-12",
-    "meta": "Essay, AI booming, LLM",
-    "summary": "After years of research, I have finally arrived at the ultimate answer to life, the universe, and everything, and the...",
-    "categories": [
-      "personal"
-    ]
-  },
-  {
     "href": "Article-7.html",
     "title": "My TOP 3 Movie",
     "date": "2026-04-03",
@@ -121,16 +111,6 @@ window.ARTICLE_INDEX = [
     ]
   },
   {
-    "href": "Article-5.html",
-    "title": "Gauss 2025 Reflection",
-    "date": "2025-12-31",
-    "meta": "",
-    "summary": "A year marked by research, conferences, friendships, and a series of small moments that made 2025 feel both busy and...",
-    "categories": [
-      "personal"
-    ]
-  },
-  {
     "href": "Article-4.html",
     "title": "Japan Geoscience Union Meeting 2025",
     "date": "2025-12-17",
@@ -138,16 +118,6 @@ window.ARTICLE_INDEX = [
     "summary": "Conference-related pages and updates for my participation in the Japan Geoscience Union Meeting 2025.",
     "categories": [
       "conference"
-    ]
-  },
-  {
-    "href": "Article-2.html",
-    "title": "Goodbye, 2024 — A Letter To Myself, A Reflection",
-    "date": "2025-01-01",
-    "meta": "",
-    "summary": "A personal walk through the months of 2024, from quiet ordinary days to the moments that ended up shaping my year more...",
-    "categories": [
-      "personal"
     ]
   },
   {
