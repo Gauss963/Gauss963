@@ -39,13 +39,17 @@ function getSortedArticles() {
   return articles;
 }
 
+function isAcademic(item) {
+  return item.categories.includes("research") || item.categories.includes("conference");
+}
+
 function renderHomeLatestArticle() {
   if (!homeLatestLink || !homeLatestMeta || !homeLatestSummary) {
     return;
   }
 
   const articles = getSortedArticles();
-  const latestArticle = articles[0];
+  const latestArticle = articles.find(isAcademic) || articles[0];
 
   if (!latestArticle) {
     return;
@@ -76,7 +80,27 @@ function renderArticlesArchive() {
 
   const fragment = document.createDocumentFragment();
 
-  articles.forEach((item) => {
+  const groups = [
+    { label: "Academic", title: "Research and conference posts", items: articles.filter(isAcademic) },
+    { label: "Personal", title: "Essays, side projects, and life", items: articles.filter((item) => !isAcademic(item)) },
+  ];
+
+  groups.forEach((group) => {
+    if (group.items.length === 0) {
+      return;
+    }
+
+    const groupHeading = document.createElement("div");
+    groupHeading.className = "section-heading archive-group-heading";
+    const groupLabel = document.createElement("p");
+    groupLabel.className = "eyebrow";
+    groupLabel.textContent = group.label;
+    const groupTitle = document.createElement("h2");
+    groupTitle.textContent = group.title;
+    groupHeading.append(groupLabel, groupTitle);
+    fragment.append(groupHeading);
+
+    group.items.forEach((item) => {
     const entry = document.createElement("article");
     entry.className = "news-entry";
 
@@ -95,6 +119,7 @@ function renderArticlesArchive() {
 
     entry.append(date, heading, summary);
     fragment.append(entry);
+    });
   });
 
   articleArchiveRoot.replaceChildren(fragment);
@@ -107,9 +132,9 @@ function renderArticlesArchive() {
   }
 
   const totalCount = articles.length;
-  const researchCount = articles.filter((item) => item.categories.includes("research")).length;
+  const researchCount = articles.filter(isAcademic).length;
   const translationCount = articles.filter((item) => item.categories.includes("translation")).length;
-  const personalCount = articles.filter((item) => item.categories.includes("personal")).length;
+  const personalCount = articles.filter((item) => !isAcademic(item) && !item.categories.includes("translation")).length;
 
   const totalNode = document.querySelector("[data-articles-total]");
   const researchNode = document.querySelector("[data-articles-research]");

@@ -580,3 +580,11 @@ ol {
     align-items: flex-start;
   }
 }
+
+.archive-group-heading {
+  margin-top: 2.5rem;
+}
+
+.archive-group-heading:first-child {
+  margin-top: 0;
+}
