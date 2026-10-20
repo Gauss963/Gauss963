@@ -581,10 +581,22 @@ ol {
   }
 }
 
-.archive-group-heading {
-  margin-top: 2.5rem;
+.archive-block {
+  margin-top: 28px;
+  padding: 28px 32px;
+  border: 1px solid var(--line-strong);
+  border-top: 4px solid var(--accent);
+  border-radius: 14px;
+  background: #f7f9fc;
 }
 
-.archive-group-heading:first-child {
-  margin-top: 0;
+.archive-block-personal {
+  border-top-color: var(--line-strong);
+  background: #fafafa;
+}
+
+@media (max-width: 640px) {
+  .archive-block {
+    padding: 20px 18px;
+  }
 }

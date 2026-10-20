@@ -21,7 +21,7 @@ document.querySelectorAll("[data-reveal]").forEach((element) => {
   observer.observe(element);
 });
 
-const articleArchiveRoot = document.querySelector("#articles-archive");
+const articleArchiveRoot = document.querySelector("#articles-academic") || document.querySelector("#articles-archive");
 const homeLatestLink = document.querySelector("[data-home-latest-link]");
 const homeLatestMeta = document.querySelector("[data-home-latest-meta]");
 const homeLatestSummary = document.querySelector("[data-home-latest-summary]");
@@ -78,29 +78,7 @@ function renderArticlesArchive() {
     return;
   }
 
-  const fragment = document.createDocumentFragment();
-
-  const groups = [
-    { label: "Academic", title: "Research and conference posts", items: articles.filter(isAcademic) },
-    { label: "Personal", title: "Essays, side projects, and life", items: articles.filter((item) => !isAcademic(item)) },
-  ];
-
-  groups.forEach((group) => {
-    if (group.items.length === 0) {
-      return;
-    }
-
-    const groupHeading = document.createElement("div");
-    groupHeading.className = "section-heading archive-group-heading";
-    const groupLabel = document.createElement("p");
-    groupLabel.className = "eyebrow";
-    groupLabel.textContent = group.label;
-    const groupTitle = document.createElement("h2");
-    groupTitle.textContent = group.title;
-    groupHeading.append(groupLabel, groupTitle);
-    fragment.append(groupHeading);
-
-    group.items.forEach((item) => {
+  const buildEntry = (item) => {
     const entry = document.createElement("article");
     entry.className = "news-entry";
 
@@ -118,11 +96,16 @@ function renderArticlesArchive() {
     summary.textContent = item.summary;
 
     entry.append(date, heading, summary);
-    fragment.append(entry);
-    });
-  });
+    return entry;
+  };
 
-  articleArchiveRoot.replaceChildren(fragment);
+  const personalRoot = document.getElementById("articles-personal");
+  if (personalRoot) {
+    articleArchiveRoot.replaceChildren(...articles.filter(isAcademic).map(buildEntry));
+    personalRoot.replaceChildren(...articles.filter((item) => !isAcademic(item)).map(buildEntry));
+  } else {
+    articleArchiveRoot.replaceChildren(...articles.map(buildEntry));
+  }
 
   const latestArticle = articles[0];
   const latestPostLink = document.querySelector("[data-latest-post]");
